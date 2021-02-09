@@ -67,11 +67,9 @@ def ubicellMQTT():
     client.subscribe(CMD_topic)
     # subscribe to status topic
     client.subscribe(STATUS_topic)
+    while True:
+        decode_mqtt()
 
-    decode_mqtt()
-
-    # wait for status topic to receive the message
-    time.sleep(30)
     # end async subscription
     client.loop_stop()
     client.disconnect()
