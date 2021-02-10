@@ -29,7 +29,6 @@ def on_message(client, userdata, msg):
 
 # decode and writes to log file
 def decode_mqtt():
-    global global_encoded_pMsg
     # current date and time
     now = datetime.now()
     today = date.today()
