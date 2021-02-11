@@ -70,7 +70,6 @@ def ubicellMQTT():
     client.loop_forever()
 
 
-# for testing
 ubicellMQTT()
 
 
