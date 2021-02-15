@@ -3,10 +3,15 @@ import codecs
 import subprocess
 from datetime import datetime, date
 
+# dest2.0 - 2.0 sku 1
+two = 'a4241089bb6a942f'
+# dest1.0 - 1.0
+one = '6daabcd0ebff3908'
+
+EUI = one
+
 # global variable to retrieve mqtt message outside of on_message function
 global_encoded_pMsg = ''
-
-EUI = 'a4241089bb6a942f'
 
 # print out log buffer
 def on_log(client, userdata, level, buffer):
