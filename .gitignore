@@ -1,4 +1,6 @@
 venv/
 *.txt
 .idea
-ubitools
+node_modules
+ubitools/ubitools.dockerfile
+ubitools/README.md
