@@ -2,6 +2,7 @@ FROM ubuntu:latest
 
 RUN apt clean
 RUN apt-get update
+RUN apt-get -y install sudo
 
 # installing nodejs
 #RUN sudo apt install -y nodejs
