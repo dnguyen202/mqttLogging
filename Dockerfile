@@ -1,5 +1,6 @@
 FROM ubuntu:latest
 
+RUN apt clean
 RUN apt-get update
 
 # installing nodejs
