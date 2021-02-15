@@ -1,8 +1,5 @@
 FROM ubuntu:latest
 
-RUN apt-get -y install sudo
-RUN sudo apt-get update
-
 # installing nodejs
 #RUN sudo apt install -y nodejs
 RUN apt-get install --yes curl
