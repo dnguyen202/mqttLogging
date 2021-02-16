@@ -1,10 +1,6 @@
 FROM ubuntu:focal
 
-RUN apt update \
-     	&& apt install \
-       ca-certificates \
-       apt-transport-https
-
+RUN apt-get update
 # installing nodejs
 #RUN sudo apt install -y nodejs
 RUN apt-get install --yes curl
