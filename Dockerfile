@@ -1,5 +1,5 @@
 FROM python:3
 
-RUN python3 -m pip install
+RUN python -m pip install --upgrade pip
 
 RUN pip3 install paho-mqtt
