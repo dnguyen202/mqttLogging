@@ -8,7 +8,7 @@ two = 'a4241089bb6a942f'
 # dest1.0 - 1.0
 one = '6daabcd0ebff3908'
 
-EUI = one
+EUI = two
 
 # global variable to retrieve mqtt message outside of on_message function
 global_encoded_pMsg = ''
