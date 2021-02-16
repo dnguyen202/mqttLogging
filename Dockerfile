@@ -1,8 +1,9 @@
-FROM ubuntu:latest
+FROM ubuntu:focal
 
-
-RUN apt clean
-RUN apt-get update
+RUN apt update \
+     	&& apt install \
+       ca-certificates \
+       apt-transport-https
 
 # installing nodejs
 #RUN sudo apt install -y nodejs
