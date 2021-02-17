@@ -22,5 +22,4 @@ RUN apt-get install -y python3-pip
 
 RUN pip3 install paho-mqtt
 
-
-CMD ["python3", "mqttLogging.py"]
+ENTRYPOINT ["python3", "mqttLogging.py"]
