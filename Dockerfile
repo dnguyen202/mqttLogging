@@ -14,7 +14,7 @@ RUN apt-get install --yes vim
 RUN npm install
 RUN npm install sprintf-js
 
-WORKDIR /usr/src/automation
+WORKDIR /usr/src/logging
 COPY . .
 
 RUN apt-get install -y python3.8
