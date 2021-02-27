@@ -4,3 +4,4 @@ venv/
 node_modules
 ubitools/ubitools.dockerfile
 ubitools/README.md
+.DS_Store

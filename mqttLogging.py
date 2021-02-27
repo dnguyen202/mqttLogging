@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import codecs
 import subprocess
+import base64
 from datetime import datetime, date
 
 # dest2.0 - 2.0 sku 1
@@ -11,7 +12,7 @@ one = '6daabcd0ebff3908'
 EUI = one
 
 # global variable to retrieve mqtt message outside of on_message function
-global_encoded_pMsg = ''
+global_mqtt_msg = ''
 
 # print out log buffer
 def on_log(client, userdata, level, buffer):
@@ -26,14 +27,21 @@ def on_connect(client, userdata, flags, rc):
 
 # callback to receive messages
 def on_message(client, userdata, msg):
-    global global_encoded_pMsg
-    print('msg received')
-    # encode to hex, then decode to utf-8 to get rid of the 'b' bytes
-    global_encoded_pMsg = str(codecs.encode(msg.payload, "hex").decode("utf-8"))
-    decode_mqtt()
+    global global_mqtt_msg
+    if msg.topic.endswith('tx'):
+        topic = 'tx'
+        # get the b64 payload value in the dictionary
+        cmd_b64 = eval(msg.payload.decode("utf-8")).get('payload')
+        # decode from b64 to get command
+        global_mqtt_msg = base64.b64decode(cmd_b64).decode("utf-8")
+    else:
+        topic = 'rx'
+        # encode to hex, then decode to utf-8 to get rid of the 'b' bytes
+        global_mqtt_msg = str(codecs.encode(msg.payload, "hex").decode("utf-8"))
+    save_mqtt(topic)
 
 # decode and writes to log file
-def decode_mqtt():
+def save_mqtt(topic):
     # current date and time
     now = datetime.now()
     today = date.today()
@@ -45,8 +53,11 @@ def decode_mqtt():
     log_file.write(f'{curr_time}\n')
     # otherwise time will print after mqtt message
     log_file.flush()
-    cmd = "node ubitools/ubilpp-decode.js " + global_encoded_pMsg
-    subprocess.run(cmd, shell=True, stdout=log_file)
+    if topic == 'tx':
+        log_file.write(f'cmd sent => {global_mqtt_msg}\n')
+    else:
+        cmd = "node ubitools/ubilpp-decode.js " + global_mqtt_msg
+        subprocess.run(cmd, shell=True, stdout=log_file)
     log_file.close()
 
 
