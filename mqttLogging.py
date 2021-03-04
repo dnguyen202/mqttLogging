@@ -63,27 +63,32 @@ def save_mqtt(topic):
 
 def ubicellMQTT():
 
-    # constructor: creating a client
-    client = mqtt.Client()
+    while True:
+        # constructor: creating a client
+        client = mqtt.Client()
 
-    # callback functions
-    client.on_connect = on_connect
-    # uncomment below to see buffer messages
-    # client.on_log = on_log
-    client.on_message = on_message
+        # callback functions
+        client.on_connect = on_connect
+        # uncomment below to see buffer messages
+        # client.on_log = on_log
+        client.on_message = on_message
 
-    # connecting to test7
-    client.connect('mqtt.test7.ubicquia.com')
+        # connecting to test7
+        client.connect('mqtt.test7.ubicquia.com')
 
-    CMD_topic = 'ubicell/%s/tx' % EUI
-    STATUS_topic = 'ubicell/%s/rx' % EUI
+        CMD_topic = 'ubicell/%s/tx' % EUI
+        STATUS_topic = 'ubicell/%s/rx' % EUI
 
-    # subscribe to command topic
-    client.subscribe(CMD_topic)
-    # subscribe to status topic
-    client.subscribe(STATUS_topic)
-    # listen to node forever
-    client.loop_forever()
+        # subscribe to command topic
+        client.subscribe(CMD_topic)
+        # subscribe to status topic
+        client.subscribe(STATUS_topic)
+        # listen to node forever
+        client.loop_forever()
+
+        # in the even the peer has disconnected
+        print("Client has been disconnected...")
+        print("Attempting to reconnect...")
 
 
 ubicellMQTT()
