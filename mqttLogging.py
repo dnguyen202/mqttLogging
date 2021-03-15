@@ -3,7 +3,7 @@ import codecs
 import subprocess
 import base64
 from datetime import datetime, date
-import sys, getopt
+import sys
 
 # dest2.0 - 2.0 sku 1
 two = 'a4241089bb6a942f'
@@ -89,6 +89,6 @@ def ubicellMQTT():
     client.loop_forever()
 
 
-#ubicellMQTT()
+ubicellMQTT()
 
 
