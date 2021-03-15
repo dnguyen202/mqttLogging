@@ -3,13 +3,16 @@ import codecs
 import subprocess
 import base64
 from datetime import datetime, date
+import sys, getopt
 
 # dest2.0 - 2.0 sku 1
 two = 'a4241089bb6a942f'
 # dest1.0 - 1.0
 one = '6daabcd0ebff3908'
 
-EUI = one
+# getting argument from shell script
+EUI = sys.argv[1]
+print(f'here is the EUI: {EUI}')
 
 # global variable to retrieve mqtt message outside of on_message function
 global_mqtt_msg = ''
@@ -63,34 +66,29 @@ def save_mqtt(topic):
 
 def ubicellMQTT():
 
-    while True:
-        # constructor: creating a client
-        client = mqtt.Client()
+    # constructor: creating a client
+    client = mqtt.Client()
 
-        # callback functions
-        client.on_connect = on_connect
-        # uncomment below to see buffer messages
-        # client.on_log = on_log
-        client.on_message = on_message
+    # callback functions
+    client.on_connect = on_connect
+    # uncomment below to see buffer messages
+    # client.on_log = on_log
+    client.on_message = on_message
 
-        # connecting to test7
-        client.connect('mqtt.test7.ubicquia.com')
+    # connecting to test7
+    client.connect('mqtt.test7.ubicquia.com')
 
-        CMD_topic = 'ubicell/%s/tx' % EUI
-        STATUS_topic = 'ubicell/%s/rx' % EUI
+    CMD_topic = 'ubicell/%s/tx' % EUI
+    STATUS_topic = 'ubicell/%s/rx' % EUI
 
-        # subscribe to command topic
-        client.subscribe(CMD_topic)
-        # subscribe to status topic
-        client.subscribe(STATUS_topic)
-        # listen to node forever
-        client.loop_forever()
-
-        # in the even the peer has disconnected
-        print("Client has been disconnected...")
-        print("Attempting to reconnect...")
+    # subscribe to command topic
+    client.subscribe(CMD_topic)
+    # subscribe to status topic
+    client.subscribe(STATUS_topic)
+    # listen to node forever
+    client.loop_forever()
 
 
-ubicellMQTT()
+#ubicellMQTT()
 
 
