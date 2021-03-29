@@ -6,14 +6,15 @@ from datetime import datetime, date
 import sys
 
 # dest2.0 - 2.0 sku 1
-two = 'a4241089bb6a942f'
+two = 'a42410e1444a9a26'
 # dest1.0 - 1.0
 one = '6daabcd0ebff3908'
 
 # getting argument from shell script
 EUI = sys.argv[1]
 print(f'here is the EUI: {EUI}')
-
+SERVER = f'mqtt.{sys.argv[2]}.ubicquia.com'
+print(f'here is the server: {SERVER}')
 # global variable to retrieve mqtt message outside of on_message function
 global_mqtt_msg = ''
 
@@ -76,7 +77,7 @@ def ubicellMQTT():
     client.on_message = on_message
 
     # connecting to test7
-    client.connect('mqtt.test7.ubicquia.com')
+    client.connect(SERVER)
 
     CMD_topic = 'ubicell/%s/tx' % EUI
     STATUS_topic = 'ubicell/%s/rx' % EUI
